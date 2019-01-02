@@ -1,7 +1,6 @@
 package com.exzone.model.dao;
 
 import com.exzone.enums.AcceptanceStatus;
-import com.exzone.enums.ExchangeType;
 import com.exzone.enums.Initiator;
 import com.exzone.enums.TransactionStatus;
 import com.exzone.model.BaseModel;
@@ -34,17 +33,6 @@ public class BarterTransaction extends BaseModel {
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
-    @NotNull
-    @Column(precision=20, scale=4)
-    private Double surcharge;
-
-    @NotNull
-    private Double vat;
-
-    @NotNull
-    @Column(length = 11)
-    private Integer quantity;
-
     @JsonProperty("date_consummated")
     private Date date_consummated;
 
@@ -65,13 +53,9 @@ public class BarterTransaction extends BaseModel {
     private BarterProduct barterProduct;
 
     /**
-     * This is to be exchanged with the selected (barter product/currency)
+     * This holds the (product/currency) to be exchanged with the selected barter product
      */
-    @ManyToOne
-    @JsonProperty("exchange_type_object")
-    private Object exchangeTypeObject;
-
     @NotNull
-    @JsonProperty("exchange_type")
-    private ExchangeType exchangeType;
+    @JsonProperty("exchange_type_id")
+    private Long  exchangeTypeId;
 }

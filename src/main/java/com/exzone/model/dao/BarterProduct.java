@@ -1,8 +1,10 @@
 package com.exzone.model.dao;
 
 
-import com.exzone.enums.*;
-import com.exzone.interfaces.DataTypeConstant;
+import com.exzone.enums.EnabledStatus;
+import com.exzone.enums.ExchangeType;
+import com.exzone.enums.PurchaseStatus;
+import com.exzone.enums.WorthStatus;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +37,6 @@ public class BarterProduct extends BaseModel {
     private String slug;
 
     @NotNull
-    @Column(length = 100)
     private String description;
 
     /**
@@ -53,7 +54,7 @@ public class BarterProduct extends BaseModel {
 
     @NotNull
     @JsonProperty("currency_worth")
-    private Double currencyWorth = 0.00;
+    private Double currencyWorth;
 
     @NotNull
     @JsonProperty("worth_status")
@@ -65,8 +66,28 @@ public class BarterProduct extends BaseModel {
     @Enumerated(EnumType.STRING)
     private PurchaseStatus purchaseStatus = PurchaseStatus.AVAILABLE;
 
-    @Column(columnDefinition = DataTypeConstant.TEXT)
-    private String surcharge;
+    @NotNull
+    @JsonProperty("exchange_type")
+    @Enumerated(EnumType.STRING)
+    private ExchangeType exchangeType;
+
+    @NotNull
+    @JsonProperty("exchange_type_description")
+    private String exchangeTypeDescription;
+
+    /**
+     * This holds (product category id / currency id) based on the exchange type selected
+     */
+    @NotNull
+    @JsonProperty("exchange_type_id")
+    private Long exchangeTypeId;
+
+    @NotNull
+    @Column(precision=20, scale=4)
+    private Double surcharge;
+
+    @NotNull
+    private Double vat;
 
     private int priority = 0;
 
@@ -77,6 +98,9 @@ public class BarterProduct extends BaseModel {
     @ManyToOne
     private Consumer owner =  new Consumer();
 
+    /**
+     * This holds the actual currency the worth currency is expressed
+     */
     @NotNull
     @ManyToOne
     private Currency currency = new Currency();
