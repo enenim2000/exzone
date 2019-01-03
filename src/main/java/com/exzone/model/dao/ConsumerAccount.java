@@ -34,8 +34,11 @@ public class ConsumerAccount extends BaseModel {
     @Column(length = 6)
     private String branchCode;
 
-    private EnabledStatus enabled = EnabledStatus.ENABLED;
+    @ManyToOne
+    private Currency currency;
 
     @ManyToOne
     private Consumer consumer;
+
+    private EnabledStatus enabled = EnabledStatus.ENABLED;
 }

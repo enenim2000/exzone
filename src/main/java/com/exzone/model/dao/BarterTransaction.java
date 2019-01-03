@@ -30,7 +30,7 @@ public class BarterTransaction extends BaseModel {
     private String transactionReference;
 
     @JsonProperty("date_consummated")
-    private Date date_consummated;
+    private Date dateConsummated;
 
     @NotNull
     @JsonProperty("acceptance_status")
@@ -60,5 +60,6 @@ public class BarterTransaction extends BaseModel {
      */
     @NotNull
     @ManyToOne
+    @JsonProperty("payment_channel")
     private PaymentChannel paymentChannel;
 }
