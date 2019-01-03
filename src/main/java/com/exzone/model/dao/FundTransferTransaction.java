@@ -26,8 +26,14 @@ public class FundTransferTransaction extends BaseModel {
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
-    @JsonProperty("date_consummated")
-    private Date dateConsummated;
+    @JsonProperty("date_paid")
+    private Date date_paid;
+
+    @JsonProperty("date_reversed")
+    private Date dateReversed;
+
+    @JsonProperty("date_settled")
+    private Date dateSettled;
 
     @Embedded
     private Amount amount;
