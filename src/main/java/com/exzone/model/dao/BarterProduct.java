@@ -76,6 +76,13 @@ public class BarterProduct extends BaseModel {
     private String exchangeTypeDescription;
 
     /**
+     * This specifies the supported channel(s)  (mobile, frontend-web, backend-web, etc) through which this product can show up
+     */
+    @Column(length = 100)
+    @JsonProperty("channel_reference")
+    private String channelReference;
+
+    /**
      * This holds (product category id / currency id) based on the exchange type selected
      */
     @NotNull
@@ -96,20 +103,29 @@ public class BarterProduct extends BaseModel {
 
     @NotNull
     @ManyToOne
-    private Consumer owner =  new Consumer();
+    private Consumer owner;
 
     /**
      * This holds the actual currency the worth currency is expressed
      */
     @NotNull
     @ManyToOne
-    private Currency currency = new Currency();
+    private Currency currency;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "barterProducts")
-    private Set<BarterCategory> barterCategories = new HashSet<>();
+    @NotNull
+    @ManyToOne
+    @JsonProperty("barter_category")
+    private BarterCategory barterCategory;
 
     @JsonBackReference
     @OneToMany(mappedBy = "barterProduct", fetch = FetchType.LAZY)
     private Set<Transaction> transactions = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "barter_product_payment_channel",
+            joinColumns = @JoinColumn(name = "barter_product_id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_channel_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"barter_product_id", "payment_channel_id"})
+    )
+    private Set<PaymentChannel> paymentChannels = new HashSet<>();
 }

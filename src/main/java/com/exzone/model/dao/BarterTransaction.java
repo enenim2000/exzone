@@ -24,10 +24,6 @@ public class BarterTransaction extends BaseModel {
     @NotNull
     private Initiator initiator;
 
-    @Column(length = 100)
-    @JsonProperty("channel_reference")
-    private String channelReference;
-
     @NotNull
     @Column(unique = true, length = 50)
     @JsonProperty("transaction_reference")
@@ -45,6 +41,13 @@ public class BarterTransaction extends BaseModel {
     private TransactionStatus transactionStatus = TransactionStatus.PENDING;
 
     /**
+     * This holds the (product/currency) to be exchanged with the selected barter product
+     */
+    @NotNull
+    @JsonProperty("exchange_type_id")
+    private Long  exchangeTypeId;
+
+    /**
      * This is the product the consumer selected
      */
     @NotNull
@@ -53,9 +56,9 @@ public class BarterTransaction extends BaseModel {
     private BarterProduct barterProduct;
 
     /**
-     * This holds the (product/currency) to be exchanged with the selected barter product
+     * This specify the channel (mobile, frontend-web, backend-web, etc) through which the transaction occur
      */
     @NotNull
-    @JsonProperty("exchange_type_id")
-    private Long  exchangeTypeId;
+    @ManyToOne
+    private PaymentChannel paymentChannel;
 }
