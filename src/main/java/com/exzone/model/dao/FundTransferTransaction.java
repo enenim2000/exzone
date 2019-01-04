@@ -2,6 +2,8 @@ package com.exzone.model.dao;
 
 import com.exzone.embeddable.Amount;
 import com.exzone.enums.Initiator;
+import com.exzone.enums.PaymentStatus;
+import com.exzone.enums.SettlementStatus;
 import com.exzone.enums.TransactionStatus;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,14 +28,24 @@ public class FundTransferTransaction extends BaseModel {
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
-    @JsonProperty("date_paid")
-    private Date date_paid;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("payment_status")
+    private PaymentStatus paymentStatus = PaymentStatus.NOT_PAID;
+
+    @JsonProperty("payment_date")
+    private Date paymentDate;
 
     @JsonProperty("date_reversed")
     private Date dateReversed;
 
-    @JsonProperty("date_settled")
-    private Date dateSettled;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("settlement_status")
+    private SettlementStatus settlementStatus = SettlementStatus.NOT_SETTLED;
+
+    @JsonProperty("settlement_date")
+    private Date settlementDate;
 
     @Embedded
     private Amount amount;
