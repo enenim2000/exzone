@@ -1,26 +1,24 @@
 package com.exzone.embeddable;
 
-import com.exzone.model.dao.Currency;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @ToString
 @Embeddable
-public class Amount{
+public class ExchangeRate {
 
     @NotNull
-    @ManyToOne
-    @JsonProperty("transaction_currency")
-    private Currency transactionCurrency;
+    @JsonProperty("source_value")
+    private Double sourceValue = 1.00;
 
     @NotNull
-    private Double amount;
+    @JsonProperty("destination_value")
+    private Double destinationValue;
 }

@@ -58,4 +58,8 @@ public class Consumer extends BaseModel {
     @JsonBackReference
     @OneToMany(mappedBy = "consumer", fetch = FetchType.LAZY)
     private Set<ConsumerAccount> consumerAccounts = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "merchant", fetch = FetchType.LAZY)
+    private Set<MerchantExchange> merchantExchanges = new HashSet<>();
 }
