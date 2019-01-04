@@ -28,6 +28,9 @@ public class FundTransferTransaction extends BaseModel {
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
+    @Embedded
+    private Amount amount;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @JsonProperty("payment_status")
@@ -35,9 +38,6 @@ public class FundTransferTransaction extends BaseModel {
 
     @JsonProperty("payment_date")
     private Date paymentDate;
-
-    @JsonProperty("date_reversed")
-    private Date dateReversed;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -47,8 +47,8 @@ public class FundTransferTransaction extends BaseModel {
     @JsonProperty("settlement_date")
     private Date settlementDate;
 
-    @Embedded
-    private Amount amount;
+    @JsonProperty("date_reversed")
+    private Date dateReversed;
 
     /**
      * This should be retrieved from the user logged in token
