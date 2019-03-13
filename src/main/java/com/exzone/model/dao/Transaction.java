@@ -75,6 +75,7 @@ public class Transaction extends BaseModel {
 
     @NotNull
     @ManyToOne
+    @JsonProperty("barter_product")
     private BarterProduct barterProduct;
 
     @ManyToOne
@@ -89,4 +90,8 @@ public class Transaction extends BaseModel {
     @NotNull
     @ManyToOne
     private Currency currency;
+
+    @ManyToOne
+    @JsonProperty("payment_channel")
+    private PaymentChannel paymentChannel;
 }

@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "tasks", uniqueConstraints = @UniqueConstraint(columnNames = {"parentTaskId", "taskType", "name"}))
+@Table(name = "tasks")
 public class Task extends BaseModel {
 
     public Task() {

@@ -35,8 +35,4 @@ public class Currency extends BaseModel {
     @JsonBackReference
     @OneToMany(mappedBy = "currency", fetch = FetchType.LAZY)
     private Set<Transaction> transactions = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "currency", fetch = FetchType.LAZY)
-    private Set<TransactionDemo> transactionDemos = new HashSet<>();
 }
