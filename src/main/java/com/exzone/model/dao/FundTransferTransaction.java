@@ -1,6 +1,5 @@
 package com.exzone.model.dao;
 
-import com.exzone.embeddable.Amount;
 import com.exzone.enums.Initiator;
 import com.exzone.enums.PaymentStatus;
 import com.exzone.enums.SettlementStatus;
@@ -17,7 +16,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "barter_transactions")
+@Table(name = "fund_transfer_transactions")
 public class FundTransferTransaction extends BaseModel {
 
     @NotNull
@@ -28,8 +27,48 @@ public class FundTransferTransaction extends BaseModel {
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
-    @Embedded
-    private Amount amount;
+    /**
+     * This is the configured processor fee as at the time of transaction
+     */
+    @NotNull
+    @JsonProperty("processor_fee")
+    private double processorFee;
+
+    /**
+     * This is the configured charge as at the time of transaction
+     */
+    @NotNull
+    private double surcharge = 0.00;
+
+    /**
+     * This is destination_currency.exchange_rate/source_currency.exchange_rate calculated as at the time of transaction
+     */
+    @NotNull
+    @JsonProperty("exchange_rate")
+    private double exchangeRate;
+
+    /**
+     * This is in source currency
+     */
+    @NotNull
+    @JsonProperty("transaction_amount")
+    private double transactionAmount;
+
+    /**
+     * (processor_fee + surcharge + transaction_amount) all in source currency
+     * This amount is sent to the payment gateway configured to handle debiting for the selected source currency
+     */
+    @NotNull
+    @JsonProperty("amount_debited")
+    private double amountDebited;
+
+    /**
+     * This amount is converted to destination currency using the formula below
+     * (transaction_amount) in source currency * (exchange_rate) calculated above
+     */
+    @NotNull
+    @JsonProperty("amount_credited")
+    private double amountCredited;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -57,6 +96,14 @@ public class FundTransferTransaction extends BaseModel {
     @ManyToOne
     @JsonProperty("consumer")
     private Consumer consumer;
+
+    /**
+     * This is the configured base currency as at the time of transaction
+     */
+    @NotNull
+    @ManyToOne
+    @JsonProperty("base_currency")
+    private Currency baseCurrency;
 
     @NotNull
     @ManyToOne
