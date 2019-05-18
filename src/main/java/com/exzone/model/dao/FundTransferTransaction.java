@@ -28,6 +28,20 @@ public class FundTransferTransaction extends BaseModel {
     private String transactionReference;
 
     /**
+     * This is the configured processor payment reference
+     */
+    @NotNull
+    @JsonProperty("processor_reference")
+    private double processorReference;
+
+    /**
+     * This is the configured processor name
+     */
+    @NotNull
+    @JsonProperty("processor_name")
+    private double processorName;
+
+    /**
      * This is the configured processor fee as at the time of transaction
      */
     @NotNull
@@ -90,7 +104,7 @@ public class FundTransferTransaction extends BaseModel {
     private Date dateReversed;
 
     /**
-     * This should be retrieved from the user logged in token
+     * This should be retrieved from the user logged-in token
      */
     @NotNull
     @ManyToOne
