@@ -5,6 +5,7 @@ import com.exzone.interfaces.PersistableEnum;
 public enum PaymentStatus implements PersistableEnum<String> {
     NOT_PAID("Not_Paid"),
     PAID("Paid"),
+    PARTIAL("Partial"),
     REVERSED("Reversed");
 
     String value;

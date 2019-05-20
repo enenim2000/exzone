@@ -19,9 +19,6 @@ import javax.validation.constraints.NotNull;
 public class BarterTransaction extends BaseModel {
 
     @NotNull
-    private Initiator initiator;
-
-    @NotNull
     @Column(unique = true, length = 50)
     @JsonProperty("transaction_reference")
     private String transactionReference;

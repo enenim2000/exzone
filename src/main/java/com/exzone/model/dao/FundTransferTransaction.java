@@ -20,9 +20,6 @@ import java.sql.Date;
 public class FundTransferTransaction extends BaseModel {
 
     @NotNull
-    private Initiator initiator;
-
-    @NotNull
     @Column(unique = true, length = 50)
     @JsonProperty("transaction_reference")
     private String transactionReference;

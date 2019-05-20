@@ -7,7 +7,8 @@ public enum TransactionStatus implements PersistableEnum<Integer> {
     PENDING(1),
     FAILED(2),
     REVERSED(3),
-    PARTIAL_PAYMENT(4);
+    NEGOTIATING(4),
+    PARTIAL_PAYMENT(5);
 
     private Integer value;
 
