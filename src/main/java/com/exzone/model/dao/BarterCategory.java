@@ -26,12 +26,8 @@ public class BarterCategory extends BaseModel {
     private String description;
 
     @NotNull
-    @Column(unique = true, length = 50)
+    @Column(unique = true, length = 20)
     private String slug;
-
-    @NotNull
-    @Column(length = 40)
-    private String icon = "fa fa-circle";
 
     private int priority = 0;
 

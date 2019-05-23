@@ -3,6 +3,7 @@ package com.exzone.model.dao;
 import com.exzone.enums.EnabledStatus;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,24 @@ public class Currency extends BaseModel {
     @NotNull
     @Column(unique = true, length = 10)
     private String html;
+
+    /**
+     * This value is relative to base currency, which is dollar
+     * The value of base (dollar) is 1
+     */
+    @NotNull
+    @Column(precision=20, scale=2)
+    @JsonProperty("exchange_rate")
+    private double exchangeRate;
+
+    @NotNull
+    @Column(precision=20, scale=2)
+    @JsonProperty("processor_fee")
+    private double processorFee;
+
+    @NotNull
+    @Column(precision=20, scale=2)
+    private double surcharge = 0.00;
 
     @NotNull
     private EnabledStatus enabled = EnabledStatus.ENABLED;

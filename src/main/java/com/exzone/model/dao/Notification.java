@@ -1,41 +1,26 @@
 package com.exzone.model.dao;
 
+import com.exzone.enums.NotificationType;
 import com.exzone.model.BaseModel;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "notifications", uniqueConstraints = @UniqueConstraint(columnNames = {"login_id", "_key", "model_type", "model_id", "state"}))
+@Table(name = "notifications")
 public class Notification extends BaseModel {
 
-    @NotNull
-    @OneToOne
-    private Login login;
+    private String to;
 
-    @JsonProperty("key")
-    @NotNull
-    @Column(unique = true)
-    private String _key;
+    private String from;
 
-    @NotNull
-    @Column(unique = true)
-    private String model_type;
-
-    @NotNull
-    @Column(unique = true)
-    private String model_id;
-
-    @NotNull
-    @Column(unique = true)
-    private String state;
-    
-    private String title;
+    private String subject;
 
     private String message;
+
+    private NotificationType type;
 }

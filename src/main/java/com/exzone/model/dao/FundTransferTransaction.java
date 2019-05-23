@@ -1,6 +1,5 @@
 package com.exzone.model.dao;
 
-import com.exzone.embeddable.Amount;
 import com.exzone.enums.Initiator;
 import com.exzone.enums.PaymentStatus;
 import com.exzone.enums.SettlementStatus;
@@ -17,19 +16,70 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "barter_transactions")
+@Table(name = "fund_transfer_transactions")
 public class FundTransferTransaction extends BaseModel {
-
-    @NotNull
-    private Initiator initiator;
 
     @NotNull
     @Column(unique = true, length = 50)
     @JsonProperty("transaction_reference")
     private String transactionReference;
 
-    @Embedded
-    private Amount amount;
+    /**
+     * This is the configured processor payment reference
+     */
+    @NotNull
+    @JsonProperty("processor_reference")
+    private double processorReference;
+
+    /**
+     * This is the configured processor name
+     */
+    @NotNull
+    @JsonProperty("processor_name")
+    private double processorName;
+
+    /**
+     * This is the configured processor fee as at the time of transaction
+     */
+    @NotNull
+    @JsonProperty("processor_fee")
+    private double processorFee;
+
+    /**
+     * This is the configured charge as at the time of transaction
+     */
+    @NotNull
+    private double surcharge = 0.00;
+
+    /**
+     * This is destination_currency.exchange_rate/source_currency.exchange_rate calculated as at the time of transaction
+     */
+    @NotNull
+    @JsonProperty("exchange_rate")
+    private double exchangeRate;
+
+    /**
+     * This is in source currency
+     */
+    @NotNull
+    @JsonProperty("transaction_amount")
+    private double transactionAmount;
+
+    /**
+     * (processor_fee + surcharge + transaction_amount) all in source currency
+     * This amount is sent to the payment gateway configured to handle debiting for the selected source currency
+     */
+    @NotNull
+    @JsonProperty("amount_debited")
+    private double amountDebited;
+
+    /**
+     * This amount is converted to destination currency using the formula below
+     * (transaction_amount) in source currency * (exchange_rate) calculated above
+     */
+    @NotNull
+    @JsonProperty("amount_credited")
+    private double amountCredited;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -51,12 +101,20 @@ public class FundTransferTransaction extends BaseModel {
     private Date dateReversed;
 
     /**
-     * This should be retrieved from the user logged in token
+     * This should be retrieved from the user logged-in token
      */
     @NotNull
     @ManyToOne
     @JsonProperty("consumer")
     private Consumer consumer;
+
+    /**
+     * This is the configured base currency as at the time of transaction
+     */
+    @NotNull
+    @ManyToOne
+    @JsonProperty("base_currency")
+    private Currency baseCurrency;
 
     @NotNull
     @ManyToOne

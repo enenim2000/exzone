@@ -20,8 +20,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "barter_products", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"owner_id", "code"}),
-        @UniqueConstraint(columnNames = {"owner_id", "name"})
+        @UniqueConstraint(columnNames = {"owner_id", "sku"})
 })
 public class BarterProduct extends BaseModel {
 
@@ -30,7 +29,7 @@ public class BarterProduct extends BaseModel {
     private String name;
 
     @Column(length = 50)
-    private String code;
+    private String sku;
 
     @NotNull
     @Column(unique = true, length = 200)
@@ -43,7 +42,8 @@ public class BarterProduct extends BaseModel {
      * This holds comma-separated image url for larger images of product
      */
     @NotNull
-    String images;
+    @JsonProperty("product_image_urls")
+    private String productImageUrls;
 
     /**
      * This holds a thumbnail image url of the product
@@ -69,32 +69,11 @@ public class BarterProduct extends BaseModel {
     @NotNull
     @JsonProperty("exchange_type")
     @Enumerated(EnumType.STRING)
-    private ExchangeType exchangeType;
+    private ExchangeType exchangeType = ExchangeType.ANY;
 
     @NotNull
     @JsonProperty("exchange_type_description")
     private String exchangeTypeDescription;
-
-    /**
-     * This specifies the supported channel(s)  (mobile, frontend-web, backend-web, etc) through which this product can show up
-     */
-    @Column(length = 100)
-    @JsonProperty("channel_reference")
-    private String channelReference;
-
-    /**
-     * This holds (product category id / currency id) based on the exchange type selected
-     */
-    @NotNull
-    @JsonProperty("exchange_type_id")
-    private Long exchangeTypeId;
-
-    @NotNull
-    @Column(precision=20, scale=4)
-    private Double surcharge;
-
-    @NotNull
-    private Double vat;
 
     private int priority = 0;
 

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
-@Table(name = "consumer_accounts")
+@Table(name = "consumer_accounts", uniqueConstraints = @UniqueConstraint(columnNames = {"currency_id", "consumer_id"}))
 public class ConsumerAccount extends BaseModel {
     @JsonProperty("account_number")
     private String accountNumber;
@@ -33,7 +33,7 @@ public class ConsumerAccount extends BaseModel {
     @Column(length = 6)
     private String branchCode;
 
-    @ManyToOne
+    @OneToOne
     private Currency currency;
 
     @ManyToOne

@@ -4,7 +4,8 @@ import com.exzone.interfaces.PersistableEnum;
 
 public enum ExchangeType implements PersistableEnum<String> {
     CASH("Cash"),
-    GOODS("Goods");
+    GOODS("Goods"),
+    ANY("Any");
 
     String value;
 
