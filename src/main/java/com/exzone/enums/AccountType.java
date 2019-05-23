@@ -3,7 +3,10 @@ package com.exzone.enums;
 import com.exzone.interfaces.PersistableEnum;
 
 public enum AccountType implements PersistableEnum<String> {
-    NUBAN("Nuban");
+    SAVINGS("Savings"),
+    CURRENT("Current"),
+    FIXED_DEPOSIT("Fixed_Deposit"),
+    RECURRING_DEPOSIT("Recurring_Deposit");
 
     String value;
 

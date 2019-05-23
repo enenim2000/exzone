@@ -42,7 +42,7 @@ public class ConsumerAccount extends BaseModel {
     @NotNull
     @Enumerated(EnumType.STRING)
     @JsonProperty("account_type")
-    private AccountType accountType = AccountType.NUBAN;
+    private AccountType accountType = AccountType.SAVINGS;
 
     private EnabledStatus enabled = EnabledStatus.ENABLED;
 }
