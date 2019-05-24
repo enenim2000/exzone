@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExchangeAccountService{
     private final ExchangeAccountRepository exchangeAccountRepository;
@@ -20,7 +22,15 @@ public class ExchangeAccountService{
         return exchangeAccountRepository.findAll(PageRequestUtil.getPageRequest());
     }
 
+    public List<ExchangeAccount> getConsumerExchangeAccounts(Long consumerId){
+        return exchangeAccountRepository.findConsumerExchangeAccounts(consumerId);
+    }
+
     public ExchangeAccount getExchangeAccount(Long id){
         return exchangeAccountRepository.findOrFail(id);
+    }
+
+    public ExchangeAccount saveExchangeAccount(ExchangeAccount exchangeAccount){
+        return exchangeAccountRepository.save(exchangeAccount);
     }
 }
