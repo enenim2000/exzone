@@ -11,12 +11,15 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "exchange_accounts")
+@Table(name = "exchange_accounts", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"currency_id", "consumer_id"})
+})
 @ToString
 /*
  * This class holds the consumer account per currency for consumer settlement purpose

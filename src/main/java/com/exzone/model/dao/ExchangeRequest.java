@@ -1,5 +1,6 @@
 package com.exzone.model.dao;
 
+import com.exzone.enums.Negotiable;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -19,10 +20,16 @@ import javax.validation.constraints.NotNull;
 public class ExchangeRequest extends BaseModel {
 
     @NotNull
-    private double rate;
+    private double rate; //(source_currency.exchangeRate / destination_currency.exchangeRate) is source unit per one destination unit
 
     @NotNull
-    private double amount;
+    private double amount = 0.00;
+
+    @NotNull
+    private Negotiable negotiable = Negotiable.NO;
+
+    @JsonProperty("transaction_reference")
+    private String transactionReference;
 
     @NotNull
     @ManyToOne

@@ -1,6 +1,7 @@
 package com.exzone.model.dao;
 
 import com.exzone.enums.LoginStatus;
+import com.exzone.enums.UserType;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +32,7 @@ public class Login extends BaseModel {
     @NotNull
     @Column(length = 50)
     @JsonProperty("user_type")
-    private String userType;
+    private UserType userType;
 
     @NotNull
     @JsonProperty("user_id")
@@ -44,18 +45,10 @@ public class Login extends BaseModel {
     private LoginStatus status = LoginStatus.ENABLED;
 
     @JsonBackReference
-    @OneToOne(mappedBy = "login", fetch = FetchType.LAZY)
-    private SecretQuestion secretQuestion;
-
-    @JsonBackReference
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY)
     private Set<Audit> audits = new HashSet<>();
 
     @JsonBackReference
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY)
     private Set<Notification> notifications  = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "login", fetch = FetchType.LAZY)
-    private Set<Tracker> trackers = new HashSet<>();
 }
