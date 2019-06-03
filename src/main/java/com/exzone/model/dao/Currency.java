@@ -2,15 +2,14 @@ package com.exzone.model.dao;
 
 import com.exzone.enums.EnabledStatus;
 import com.exzone.model.BaseModel;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -50,8 +49,4 @@ public class Currency extends BaseModel {
 
     @NotNull
     private EnabledStatus enabled = EnabledStatus.ENABLED;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "currency", fetch = FetchType.LAZY)
-    private Set<Transaction> transactions = new HashSet<>();
 }

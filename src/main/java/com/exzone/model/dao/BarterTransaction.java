@@ -2,7 +2,6 @@ package com.exzone.model.dao;
 
 import com.exzone.enums.AcceptanceStatus;
 import com.exzone.enums.ExchangeType;
-import com.exzone.enums.Initiator;
 import com.exzone.enums.TransactionStatus;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;

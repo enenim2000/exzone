@@ -24,9 +24,6 @@ public class Authorization extends BaseModel {
     }
 
     @OneToOne
-    private Task task;
-
-    @OneToOne
     private Staff staff;
 
     @NotNull

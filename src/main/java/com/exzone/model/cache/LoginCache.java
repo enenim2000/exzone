@@ -4,7 +4,6 @@ import com.exzone.constant.ModelFieldConstant;
 import com.exzone.enums.EnabledStatus;
 import com.exzone.enums.LoggedIn;
 import com.exzone.enums.LoginStatus;
-import com.exzone.model.dao.Tracker;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -37,8 +36,6 @@ public class LoginCache {
     @SerializedName("login_status")
     private LoginStatus loginStatus;
 
-    private Tracker tracker;
-
     @NotNull
     @JsonProperty("logged_in")
     @SerializedName("logged_in")
@@ -65,11 +62,10 @@ public class LoginCache {
     private Date updatedAt;
 
     public boolean hasExpired(long idleTimeout) {
-        System.out.println("getCreated() = " + getTracker().getTimeOfLastActivity());
-        if(getTracker().getTimeOfLastActivity() == null){
+        if(getUpdatedAt() == null){
             return true;
         }
-        LocalDateTime localDateTime = getTracker().getTimeOfLastActivity().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime localDateTime = getUpdatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         localDateTime = localDateTime.plusMinutes(idleTimeout);
         return  Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()).before(new Date());
     }

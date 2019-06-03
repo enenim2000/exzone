@@ -1,6 +1,5 @@
 package com.exzone.model.dao;
 
-import com.exzone.enums.Initiator;
 import com.exzone.enums.PaymentStatus;
 import com.exzone.enums.SettlementStatus;
 import com.exzone.enums.TransactionStatus;

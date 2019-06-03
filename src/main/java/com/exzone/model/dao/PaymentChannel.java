@@ -44,9 +44,5 @@ public class PaymentChannel extends BaseModel {
 
     @JsonBackReference
     @OneToMany(mappedBy = "paymentChannel", fetch = FetchType.LAZY)
-    private Set<Transaction> transactions = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "paymentChannel", fetch = FetchType.LAZY)
     private Set<BarterTransaction> barterTransactions = new HashSet<>();
 }

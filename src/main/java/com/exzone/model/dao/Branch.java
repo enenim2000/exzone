@@ -40,15 +40,6 @@ public class Branch extends BaseModel {
     private EnabledStatus enabled = EnabledStatus.ENABLED;
 
     @JsonBackReference
-    @ManyToMany
-    @JoinTable(name = "branch_public_holiday",
-            joinColumns = @JoinColumn(name = "branch_id"),
-            inverseJoinColumns = @JoinColumn(name = "public_holiday_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"branch_id", "public_holiday_id"})
-    )
-    private Set<PublicHoliday> publicHolidays = new HashSet<>();
-
-    @JsonBackReference
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private Set<Staff> staff = new HashSet<>();
 

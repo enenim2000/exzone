@@ -6,7 +6,6 @@ import com.exzone.enums.ExchangeType;
 import com.exzone.enums.PurchaseStatus;
 import com.exzone.enums.WorthStatus;
 import com.exzone.model.BaseModel;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -95,10 +94,6 @@ public class BarterProduct extends BaseModel {
     @ManyToOne
     @JsonProperty("barter_category")
     private BarterCategory barterCategory;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "barterProduct", fetch = FetchType.LAZY)
-    private Set<Transaction> transactions = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "barter_product_payment_channel",

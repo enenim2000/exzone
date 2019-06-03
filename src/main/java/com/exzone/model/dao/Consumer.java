@@ -44,22 +44,6 @@ public class Consumer extends BaseModel {
     private EnabledStatus enabled = EnabledStatus.ENABLED;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "consumer", fetch = FetchType.LAZY)
-    private Set<ConsumerSetting> consumerSettings = new HashSet<>();
-
-    @JsonBackReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<BarterProduct> barterProducts = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "consumer", fetch = FetchType.LAZY)
-    private Set<Transaction> transactions = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "consumer", fetch = FetchType.LAZY)
-    private Set<ConsumerAccount> consumerAccounts = new HashSet<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "merchant", fetch = FetchType.LAZY)
-    private Set<MerchantExchange> merchantExchanges = new HashSet<>();
 }
