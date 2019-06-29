@@ -1,5 +1,6 @@
 package com.exzone.shared;
 
+import com.exzone.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,8 +27,8 @@ public class AuthToken {
     @JsonProperty("user_name")
     private String userName;
 
-    @JsonProperty("user_role")
-    private String userRole;
+    @JsonProperty("user_type")
+    private UserType userType;
 
     @JsonProperty("created_at")
     private Date createdAt;

@@ -2,6 +2,7 @@ package com.exzone.model.dao;
 
 import com.exzone.enums.LoginStatus;
 import com.exzone.enums.UserType;
+import com.exzone.enums.VerifyStatus;
 import com.exzone.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -43,6 +44,9 @@ public class Login extends BaseModel {
 
     @NotNull
     private LoginStatus status = LoginStatus.ENABLED;
+
+    @NotNull
+    private VerifyStatus verifyStatus = VerifyStatus.NOT_VERIFIED;
 
     @JsonBackReference
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY)

@@ -17,7 +17,6 @@ import com.exzone.model.dao.Login;
 import com.exzone.service.dao.ConsumerService;
 import com.exzone.service.dao.LoginService;
 import com.exzone.util.PasswordEncoder;
-import com.exzone.util.message.CommonMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/consumer")
+@RequestMapping("/consumers")
 public class ConsumerController {
 
     private final ConsumerService consumerService;
@@ -60,7 +59,7 @@ public class ConsumerController {
     public Response<ModelResponse<Consumer>> signUpConsumers(@Valid @RequestBody ConsumerRequest request){
 
         if(!request.getPassword().equals(request.getConfirmPassword())){
-            throw new AppException("password_mismatch");
+            throw new AppException("password mismatch");
         }
 
         Consumer consumer = request.buildModel();
@@ -81,12 +80,12 @@ public class ConsumerController {
             }
 
             ModelResponse<Consumer> response = new ModelResponse<>(consumer);
-            response.setMessage(CommonMessage.msg("consumer_signup_success"));
+            response.setMessage("consumer sign-up success");
 
             return new Response<>(new ModelResponse<>(consumer));
         }
 
-        throw new AppException("signup_failed");
+        throw new AppException("sign-up failed");
     }
 
 }

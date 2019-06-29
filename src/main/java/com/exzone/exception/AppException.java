@@ -1,6 +1,5 @@
 package com.exzone.exception;
 
-import com.exzone.util.message.ExceptionMessage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,23 +12,23 @@ public class AppException extends RuntimeException{
 
     private HttpStatus status;
 
-    public AppException(String key) {
-        super(ExceptionMessage.msg(key));
+    public AppException(String message) {
+        super(message);
         status = HttpStatus.EXPECTATION_FAILED;
     }
 
-    public AppException(String key, HttpStatus status) {
-        super(ExceptionMessage.msg(key));
+    public AppException(String message, HttpStatus status) {
+        super(message);
         this.status = status;
     }
 
-    public AppException(String key, String role, HttpStatus status) {
-        super(ExceptionMessage.msg(key, role));
+    public AppException(String message, String role, HttpStatus status) {
+        super(message.replace("{}", role));
         this.status = status;
     }
 
-    public AppException(String key, String role) {
-        super(ExceptionMessage.msg(key, role));
+    public AppException(String message, String role) {
+        super(message.replace("{}", role));
         status = HttpStatus.EXPECTATION_FAILED;
     }
 

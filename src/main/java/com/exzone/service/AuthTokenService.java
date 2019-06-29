@@ -85,6 +85,10 @@ public class AuthTokenService {
         return new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false).convertValue(claims, AuthToken.class);
     }
 
+    public void signOut(){
+
+    }
+
     private PrivateKey getKey(){
         PrivateKey privateKey = null;
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(secret.getBytes()));
